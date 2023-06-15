@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @section ('content')
-¿Desea eliminar el autor:{{$autor->nombre}}?
+<p>¿Desea eliminar el autor: {{$autor->nombre}}?</p>
 <br>
 <br>
 <form action="/Autores/{{$autor->id}}"method="POST">

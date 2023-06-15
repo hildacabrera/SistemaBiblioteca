@@ -65,7 +65,13 @@ class AutorController extends Controller
 
         return redirect('/Autores');
     }
+    public function delete(string $id)
+    {
+     return view('Autores.delete',
+     ['autor'=>Autor::find($id)
+    ]);
 
+    }
     /**
      * Remove the specified resource from storage.
      */

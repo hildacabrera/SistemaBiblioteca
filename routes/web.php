@@ -18,3 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::resource('/Autores', AutorController::class);
+Route::get('/Autores/{id}/delete',[AutorController::class,'delete']);

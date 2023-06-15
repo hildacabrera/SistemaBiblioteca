@@ -1,55 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="{{ asset('assets/funciones/funcion.js') }}"></script>
+    <link href="{{ asset('assets/css/bootstrap-5.1.3-dist/css/bootstrap.min.css') }}" rel="stylesheet">
     
-    <title>Sistema de Bibliotecas IUD</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   
+    <script src="{{ asset('assets/css/bootstrap-5.1.3-dist/js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('assets/css/estilos.css') }}">
+    <title>Sistema de Biblioteca IUDigital</title>
 </head>
+
 <body>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bootstrap demo</title>
-  <link rel="stylesheet" type="text/css" href="css/estilos.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  
-      <div class="container-fluid">
-        <img
-        src="https://www.iudigital.edu.co/Style%20Library/images/logo-escudo.png"
-        height="60"
-        alt="MDB Logo"
-        loading="lazy"
-      />
-  
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  </div>
-</nav>
-  <h1 class="text-center">Sistema de Biblioteca IUD</h1>
-
-<div class="container-fluid"><hr>
-@yield('content')
-<footer class="bg-light text-center text-white">
-    <!-- Grid container -->
-    <div style="">
-    <div class="container p-4 pb-0" >
-      <!-- Section: Social media -->
-      <section class="mb-4">
-        <footer>
-          <div class="social-icons">
-              <a href="https://www.facebook.com/tu_pagina_de_facebook" target="_blank"><img src="facebook.png" alt="facebook"></a>
-              <a href="https://www.instagram.com/tu_perfil_de_instagram" target="_blank"><img src="instagram.png" alt="instagram"></a>
-              <a href="https://api.whatsapp.com/send?phone=1234567890" target="_blank"><img src="whatsapp.png" alt=" whatsapp "></a>
+    <!--Crear Menu-->
+    <header>
+        <nav class="menu">
+            <div class="hamburger" onclick="mostrar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <label class="logo"><img src="{{ asset('assets/imagenes/LOGO.png') }}" alt="logo IUDIGITAL"></label>
+            <ul id="sliding_menu">
+                <li><span class="close" onclick="ocultar()">X</span> </span></li>
+                <li><a href="/Auores">Inicio</a></li>
+                <li><a href="#">Catalogos</a></li>
+                <li><a href="#">Colecciones</a></li>
+                <li><a href="#">Servicios</a></li>
+                <li><a href="#">Registrar usuario</a></li>
+            </ul>
+        </nav>
+    </header>
+	
+    <div class="banner">
+      <div class="centrar">
+        <div class="container fondo">
+          <h1>Catálogo de biblioteca</h1>
+          <div class="row">
+            <div id="rojo" class="col-12">
+              @yield('content')
+            </div>
           </div>
-      </footer>
-    <!-- Copyright -->
-  </footer>
-
-
-</div>
-
+        </div>
+      </div> 
+    </div> 
 </body>
 </html>

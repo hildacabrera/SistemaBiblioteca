@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+}
+.menu ul{
+    float: right;
+    margin: 10px;
+} 
+.menu ul li{
+    display: inline-block;
+    margin: 30PX 15PX;
+}
+.menu ul li a{
+   font-size: 16PX;
+   padding: 8PX 6PX;
+   text-decoration: none;
+   color: beige;
+}
+.menu ul li a:hover{
+    color: blue;
+}
+.menu{
+    background-color: rgb(2, 2, 48);
+}
+/*Banner revisar porque no funciona la imagen*/
+.banner{
+    width: 100%;
+    position: relative;
+    height: 100vh;
+    background: url('../imagenes/banner.jpg') no-repeat center/cover;
+    left: 0;
+    top: 0;
+}
+.banner .texto_banner{
+    position: absolute;
+    top: 50%;
+    left: 50px;
+    transform: translate(-50%m, -50% );
+    padding: 20px;
+    width: 20px;
+    min-height: 20%;
+    border-radius: 20px;
+    background-color: blueviolet;
+    
+}
+.fondo{
+    background-color: white;
+    position: absolute;
+    opacity: 0.8;
+    padding: 30px;
+    border-radius: 25px; 
+    /* max-width: unset; */
+    /* width: unset; */
+}
+ul li a{
+    color: black;
+    font-weight: bold;
+}
+div .centrar{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.ttable-responsive-md{
+    overflow-x: auto;
+}
+@media(max-width: 700px){
+    .hamburger{
+        width: 30px;
+        position: absolute;
+        top: 40px;
+        transform: translate(-50%);
+    }
+    .hamburger span{
+        margin-bottom: 3px;
+        background-color: blue;
+        display: block;
+        height: 3px;
+    }
+    .menu .logo{
+        margin-left: 50px;
+    }
+    .menu{
+        position: relative;
+    }
+    nav ul{
+        float: none;
+        width: 300px;
+        padding: 0;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        background-color: black;
+        margin: 0px;
+        padding-top: 60px;
+        transition: 1s;
+        left: -100%;
+    }
+    nav ul#sliding_menu{
+        z-index: 1;
+    }
+    .open{
+        left: 0;
+    }
+    .menu ul li{
+        display: block;
+        float: none;
+    }
+    .menu ul li a{
+        font-size: 18PX;
+        padding: 10PX 40px;
+    }
+    .close{
+        display: block;
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        right: 10px;
+        top: 15px;
+        color: blue;
+        font-size: 20px;
+        cursor: pointer;
+    }
+}

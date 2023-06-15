@@ -6,7 +6,7 @@
     <thead>
 <tr>
     <th colspan="4"> 
-        <a class="btn btn-primary" href="/Autores/create">Crear Autor</a>
+        <a class="btn btn-primary" href="/Autores/create">Agregar Autor</a>
     </th>
     
 </tr>
@@ -23,12 +23,7 @@
 <td>{{$autor->id}}</td>
 <td>{{$autor->nombre}}</td>
 <td><a class="btn btn-primary" href="/Autores/{{$autor->id}}/edit"><small>Modificar</small></a>
-  {{--  <a class="btn btn-danger" href="/Autores/{{$autor->id}}/delete"><small>Eliminar</small></a>  --}}
-  <form style="display: inline-block;" action="/Autores/{{$autor->id}}"method="POST">
-    @csrf
-    @method('delete')
-    <button type="submit" class="btn btn-danger">Eliminar</button>
-    </form>
+  <a class="btn btn-danger" href="/Autores/{{$autor->id}}/delete"><small>Eliminar</small></a>
 </td>
 </tr>
 
@@ -38,6 +33,5 @@
 <br>
 <br>
 <br>
-
 
 @endsection
