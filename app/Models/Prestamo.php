@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Prestamo extends Model
 {
     use HasFactory;
+    protected $table = 'prestamo';
+    public $timestamps =false;
+    protected $primaryKey = 'id';
 }

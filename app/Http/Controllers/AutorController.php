@@ -12,7 +12,7 @@ class AutorController extends Controller
      */
     public function index()
     {
-        return view('Autores.index',[
+        return view('Autor.index',[
             'autor'=>Autor::all()
             
         ]);
@@ -23,7 +23,7 @@ class AutorController extends Controller
      */
     public function create()
     {
-        return view('Autores.create');
+        return view('Autor.create');
     }
 
     /**
@@ -35,7 +35,7 @@ class AutorController extends Controller
         $autor->nombre =$request->get('nombre');
                 $autor->save();
  
-        return redirect('/Autores');
+        return redirect('/Autor');
     }
 
     /**
@@ -51,7 +51,7 @@ class AutorController extends Controller
      */
     public function edit(string $id)
     {
-        return view('Autores.edit',['autor'=>Autor::find($id)]);
+        return view('Autor.edit',['autor'=>Autor::find($id)]);
     }
 
     /**
@@ -63,11 +63,11 @@ class AutorController extends Controller
         $autor->nombre =$request->get('nombre');
         $autor->save();
 
-        return redirect('/Autores');
+        return redirect('/Autor');
     }
     public function delete(string $id)
     {
-     return view('Autores.delete',
+     return view('Autor.delete',
      ['autor'=>Autor::find($id)
     ]);
 
@@ -79,7 +79,7 @@ class AutorController extends Controller
     {
         $autor = Autor::find($id);
         $autor->delete();
-        return redirect('/Autores');
+        return redirect('/Autor');
     }
     
 }

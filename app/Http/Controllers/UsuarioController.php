@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Usuario;
 
 use Illuminate\Http\Request;
 
@@ -11,7 +12,10 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        return view('Usuario.index',[
+            'usuario'=>Usuario::all()
+            
+        ]);
     }
 
     /**
@@ -19,7 +23,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('Usuario.create');
     }
 
     /**
@@ -27,7 +31,13 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $usuario = new Usuario ();
+        $usuario->nombre =$request->get('nombre');
+        $usuario->telefono =$request->get('telefono');
+        $usuario->direccion =$request->get('direccion');
+        $usuario->save();
+ 
+        return redirect('/Usuario');
     }
 
     /**
@@ -43,7 +53,7 @@ class UsuarioController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('Usuario.edit',['usuario'=>Usuario::find($id)]);
     }
 
     /**
@@ -51,14 +61,29 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
-    }
+        $usuario = Usuario::find($id);
+        $usuario->nombre =$request->get('nombre');
+        $usuario->telefono =$request->get('telefono');
+        $usuario->direccion =$request->get('direccion');
+        $usuario->save();
 
+        return redirect('/Usuario');
+    }
+    public function delete(string $id)
+    {
+     return view('Usuario.delete',
+     ['usuario'=>Usuario::find($id)
+    ]);
+
+    }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $usuario = Usuario::find($id);
+        $usuario->delete();
+        return redirect('/Usuario');
+    
     }
 }

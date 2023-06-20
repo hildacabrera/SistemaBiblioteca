@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section ('content')
 
-  <form action="/Autores/{{$autor->id}}"method="POST">
+  <form action="/Autor/{{$autor->id}}"method="POST">
     @csrf
     @method('put')
     <div class="container mt-4">
@@ -14,7 +14,7 @@
             <input type="text"id="nombre" name="nombre"value="{{$autor->nombre}}">
     
           </div>
-<a class="btn btn-primary" href="/Autores">Regresar</a>
+<a class="btn btn-primary" href="/Autor">Regresar</a>
 <button type= "submit" class="btn btn-primary ">Guardar</button>
 </form>
 

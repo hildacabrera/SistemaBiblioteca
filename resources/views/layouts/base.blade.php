@@ -26,11 +26,12 @@
             <label class="logo"><img src="{{ asset('assets/imagenes/LOGO.png') }}" alt="logo IUDIGITAL"></label>
             <ul id="sliding_menu">
                 <li><span class="close" onclick="ocultar()">X</span> </span></li>
-                <li><a href="/Auores">Inicio</a></li>
-                <li><a href="#">Catalogos</a></li>
-                <li><a href="#">Colecciones</a></li>
-                <li><a href="#">Servicios</a></li>
-                <li><a href="#">Registrar usuario</a></li>
+                <li><a href="/Autor">Autores</a></li>
+                <li><a href="/Editorial">Editoriales</a></li>
+                <li><a href="/Libro">Libros</a></li>
+                <li><a href="/Ejemplar">Ejemplares</a></li>
+                <li><a href="/Prestamo">Prestamos</a></li>
+                <li><a href="/Usuario">Usuarios</a></li>
             </ul>
         </nav>
     </header>

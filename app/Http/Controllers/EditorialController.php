@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Editorial;
 use Illuminate\Http\Request;
 
 class EditorialController extends Controller
@@ -11,7 +12,10 @@ class EditorialController extends Controller
      */
     public function index()
     {
-        //
+        return view('Editorial.index',[
+            'editorial'=>Editorial::all()
+            
+        ]);
     }
 
     /**
@@ -19,7 +23,7 @@ class EditorialController extends Controller
      */
     public function create()
     {
-        //
+        return view('Editorial.create');
     }
 
     /**
@@ -27,7 +31,11 @@ class EditorialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $editorial = new Editorial ();
+        $editorial->nombre =$request->get('nombre');
+                $editorial->save();
+ 
+        return redirect('/Editorial');
     }
 
     /**
@@ -43,7 +51,7 @@ class EditorialController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('Editorial.edit',['editorial'=>Editorial::find($id)]);
     }
 
     /**
@@ -51,14 +59,26 @@ class EditorialController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
-    }
+        $editorial = Editorial::find($id);
+        $editorial->nombre =$request->get('nombre');
+        $editorial->save();
 
+        return redirect('/Editorial');
+    }
+    public function delete(string $id)
+    {
+     return view('Editorial.delete',
+     ['editorial'=>Editorial::find($id)
+    ]);
+
+    }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $editorial = Editorial::find($id);
+        $editorial->delete();
+        return redirect('/Editorial');
     }
 }
