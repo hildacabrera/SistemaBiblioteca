@@ -8,7 +8,7 @@
          
           <div class="mb-3">
             <label for="nombre">Nombre Editorial:</label>
-            <input type="text" class="form-control" id="nombre" name="nombre">
+            <input type="text" class="form-control" id="nombre" name="nombre" maxlength="255" required="required">
           </div>
           
      

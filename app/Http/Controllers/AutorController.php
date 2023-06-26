@@ -77,9 +77,38 @@ class AutorController extends Controller
      */
     public function destroy(string $id)
     {
-        $autor = Autor::find($id);
-        $autor->delete();
-        return redirect('/Autor');
+        $borrarAutor = $this->buscarAutorEnLibro($id);
+        if($borrarAutor == "Y"){
+            $autor = Autor::find($id);
+            $autor->delete();
+            return redirect('/Autor');
+        }else{
+            $autor = Autor::find($id);
+            $nombreAutor = $autor->nombre;
+
+            return redirect()->action([self::class, 'index'],
+            ['error' => 'No puede eliminar el autor "'.$nombreAutor.'" porque esta asignado en varios libros.']);
+        }
+        
+    }
+
+    public function buscarAutorEnLibro(string $autor_id)
+    {
+        $borrarAutor = "N";
+        $autor = Autor::select('*')
+        ->join('libro','autor.id', '=','libro.autor_id')
+        ->where('autor.id', '=', $autor_id)
+        ->get();
+        if($autor->count() > 0){
+            $borrarAutor = "N";
+        }else{
+            $borrarAutor = "Y";
+        }
+        // }
+        // foreach($ejemplar as $ejemplar){
+        //     $nombreEjemplarLibro = $ejemplar->localizacion." - Libro: ".$ejemplar->libro_titulo;
+        // }
+        return $borrarAutor;
     }
     
 }

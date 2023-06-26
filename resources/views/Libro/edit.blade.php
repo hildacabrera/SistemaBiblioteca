@@ -8,13 +8,13 @@
 
             <div class="mb-3">
                 <label for="titulo">titulo:</label>
-                <input type="text" class="form-control" id="titulo" name="titulo" value="{{ $libro->titulo }}">
+                <input type="text" class="form-control" id="titulo" name="titulo" value="{{ $libro->titulo }}" maxlength="255" required="required">
                 <label for="isbn">ISBN:</label>
-                <input type="text" class="form-control" id="isbn" name="isbn" value="{{ $libro->isbn }}">
+                <input type="text" class="form-control" id="isbn" name="isbn" value="{{ $libro->isbn }}" required="required">
                 <label for="paginas">Paginas:</label>
-                <input type="text" class="form-control" id="paginas" name="paginas" value="{{ $libro->paginas }}">
+                <input type="text" class="form-control" id="paginas" name="paginas" value="{{ $libro->paginas }}" required="required">
                 <label for="localizacion">Localizacion:</label>
-                <input type="text" class="form-control" id="localizacion" name="localizacion" value="{{ $libro->localizacion }}">
+                <input type="text" class="form-control" id="localizacion" name="localizacion" value="{{ $libro->localizacion }}" required="required">
                 <label for="autor_id">Autor:</label>
                 <select class="form-control" id="autor_id" name="autor_id">
                     @foreach ($autor as $autor)

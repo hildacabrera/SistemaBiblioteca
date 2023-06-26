@@ -8,11 +8,11 @@
          
           <div class="mb-3">
             <label for="nombre">Nombre Usuario:</label>
-            <input type="text" class="form-control" id="nombre" name="nombre">
+            <input type="text" class="form-control" id="nombre" name="nombre" maxlength="255" required="required">
             <label for="nombre">Telefono:</label>
-            <input type="number" class="form-control" id="telefono" name="telefono">
+            <input type="number" class="form-control" id="telefono" name="telefono" required="required">
             <label for="nombre">Dirección:</label>
-            <input type="text" class="form-control" id="direccion" name="direccion">
+            <input type="text" class="form-control" id="direccion" name="direccion" maxlength="255" required="required">
 
 
           </div>

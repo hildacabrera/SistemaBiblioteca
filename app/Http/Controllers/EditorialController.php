@@ -77,8 +77,39 @@ class EditorialController extends Controller
      */
     public function destroy(string $id)
     {
-        $editorial = Editorial::find($id);
+       /* $editorial = Editorial::find($id);
         $editorial->delete();
-        return redirect('/Editorial');
+        return redirect('/Editorial');*/
+        $borrarEditorial = $this->buscarEditorialEnLibro($id);
+        if($borrarEditorial == "Y"){
+            $editorial = Editorial::find($id);
+            $editorial->delete();
+            return redirect('/Editorial');
+        }else{
+            $editorial = Editorial::find($id);
+            $nombreEditorial = $editorial->nombre;
+
+            return redirect()->action([self::class, 'index'],
+            ['error' => 'No puede eliminar el Editorial "'.$nombreEditorial.'" porque esta asignado en varios libros.']);
+        }
+
+    }
+    public function buscarEditorialEnLibro(string $editorial_id)
+    {
+        $borrarEditorial = "N";
+        $editorial = Editorial::select('*')
+        ->join('libro','editorial.id', '=','libro.editorial_id')
+        ->where('editorial.id', '=', $editorial_id)
+        ->get();
+        if($editorial->count() > 0){
+            $borrarEditorial = "N";
+        }else{
+            $borrarEditorial = "Y";
+        }
+        // }
+        // foreach($ejemplar as $ejemplar){
+        //     $nombreEjemplarLibro = $ejemplar->localizacion." - Libro: ".$ejemplar->libro_titulo;
+        // }
+        return $borrarEditorial;
     }
 }

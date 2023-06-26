@@ -10,8 +10,8 @@
         <form>
           
           <div class="form-group col-6">
-            <label for="nombre">Nombre Autor:</label>
-            <input type="text"id="nombre" name="nombre"value="{{$editorial->nombre}}">
+            <label for="nombre">Nombre Editorial:</label>
+            <input type="text"id="nombre" name="nombre"value="{{$editorial->nombre}}" maxlength="255" required="required">
     
           </div>
           <br>

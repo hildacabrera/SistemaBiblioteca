@@ -11,7 +11,7 @@
           
           <div class="form-group col-6">
             <label for="nombre">Nombre Autor:</label>
-            <input type="text"id="nombre" name="nombre"value="{{$autor->nombre}}">
+            <input type="text"id="nombre" name="nombre"value="{{$autor->nombre}}" maxlength="255" required="required">
     
           </div>
 <a class="btn btn-primary" href="/Autor">Regresar</a>

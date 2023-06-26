@@ -99,8 +99,40 @@ class LibroController extends Controller
      */
     public function destroy(string $id)
     {
-        $libro = Libro::find($id);
+       /* $libro = Libro::find($id);
         $libro->delete();
-           return redirect('/Libro');
+           return redirect('/Libro');*/
+
+        $borrarLibro = $this->buscarLibroEditorial($id);
+        if($borrarLibro == "Y"){
+            $libro = Libro::find($id);
+            $libro->delete();
+            return redirect('/Editorial');
+        }else{
+            $libro = Libro::find($id);
+            $nombreLibro = $libro->titulo;
+   
+            return redirect()->action([self::class, 'index'],
+            ['error' => 'No puede eliminar el libro "'.$nombreLibro.'" porque esta asignado en varios editoriales.']);
+        }
+    }
+    public function buscarLibroEditorial(string $libro_id)
+    {
+        $borrarLibro = "N";
+        $libro = Libro::select('*')
+        ->join('editorial','libro.editorial_id', '=','editorial.id')
+        ->where('libro.id', '=', $libro_id)
+        ->get();
+   
+        if($libro->count() > 0){
+            $borrarLibro = "N";
+        }else{
+            $borrarLibro = "Y";
+        }
+        // }
+        // foreach($ejemplar as $ejemplar){
+        //     $nombreEjemplarLibro = $ejemplar->localizacion." - Libro: ".$ejemplar->libro_titulo;
+        // }
+        return $borrarLibro;
     }
 }

@@ -81,9 +81,40 @@ class UsuarioController extends Controller
      */
     public function destroy(string $id)
     {
-        $usuario = Usuario::find($id);
+       /* $usuario = Usuario::find($id);
         $usuario->delete();
-        return redirect('/Usuario');
+        return redirect('/Usuario');*/
+        $borrarUsuario = $this->buscarUsuarioPrestamo($id);
+        if($borrarUsuario == "Y"){
+            $usuario = Usuario::find($id);
+            $usuario->delete();
+            return redirect('/Usuario');
+        }else{
+            $usuario = Usuario::find($id);
+            $nombreUsuario = $usuario->nombre;
+   
+            return redirect()->action([self::class, 'index'],
+            ['error' => 'No puede eliminar el libro "'.$nombreUsuario.'" porque esta asignado en varios editoriales.']);
+        }    
     
+    }
+    public function buscarUsuarioPrestamo(string $usuario_id)
+    {
+        $borrarUsuario = "N";
+        $usuario = Usuario::select('*')
+        ->join('prestamo','usuario.id', '=','prestamo.usuario_id')
+        ->where('usuario.id', '=', $usuario_id)
+        ->get();
+   
+        if($usuario->count() > 0){
+            $borrarUsuario = "N";
+        }else{
+            $borrarUsuario = "Y";
+        }
+        // }
+        // foreach($ejemplar as $ejemplar){
+        //     $nombreEjemplarLibro = $ejemplar->localizacion." - Libro: ".$ejemplar->libro_titulo;
+        // }
+        return $borrarUsuario;
     }
 }

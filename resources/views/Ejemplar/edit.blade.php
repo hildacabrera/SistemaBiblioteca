@@ -11,9 +11,9 @@
           
           <div class="form-group col-6">
             <label for="localizacion">Localizacion:</label>
-            <input type="text"id="localizacion" name="localizacion"value="{{$ejemplar->localizacion}}"><br><br>
+            <input type="text"id="localizacion" name="localizacion"value="{{$ejemplar->localizacion}}" maxlength="255" required="required"><br><br>
             <label for="cantidad">Cantidad</label>
-            <input type="number"id="cantidad" name="cantidad"value="{{$ejemplar->cantidad}}"><br><br>
+            <input type="number"id="cantidad" name="cantidad"value="{{$ejemplar->cantidad}}" required="required"><br><br>
             <label for="libro_id">Titulo libro:</label>
                 <select class="form-control" id="libro_id" name="libro_id">
                     @foreach ($libro as $libro)

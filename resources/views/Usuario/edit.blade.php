@@ -11,11 +11,11 @@
           
           <div class="form-group col-6">
             <label for="nombre">Nombre Usuario:</label>
-            <input type="text"id="nombre" name="nombre"value="{{$usuario->nombre}}"><br><br>
+            <input type="text"id="nombre" name="nombre"value="{{$usuario->nombre}}" maxlength="255" required="required"><br><br>
             <label for="Telefono">Telefono</label>
-            <input type="text"id="telefono" name="telefono"value="{{$usuario->telefono}}"><br><br>
+            <input type="number"id="telefono" name="telefono"value="{{$usuario->telefono}}" required="required"><br><br>
             <label for="direccion">Direccion</label>
-            <input type="text"id="direccion" name="direccion"value="{{$usuario->direccion}}"><br><br>      
+            <input type="text"id="direccion" name="direccion"value="{{$usuario->direccion}}" required="required"><br><br>      
     
           </div>
 <a class="btn btn-primary" href="/Usuario">Regresar</a>

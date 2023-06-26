@@ -1,7 +1,9 @@
 @extends('layouts.base')
 @section('content')
 
-
+@if (isset($_REQUEST['error']) && $_REQUEST['error'] != "")
+    <div class="alert alert-danger">{{ $_REQUEST['error'] }}</div>
+@endif
 <table class="table table-striped">
     <thead>
 <tr>

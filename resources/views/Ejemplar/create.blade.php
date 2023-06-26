@@ -8,9 +8,9 @@
          
           <div class="mb-3">
             <label for="localizacion">Localizacion:</label>
-            <input type="text" class="form-control" id="localizacion" name="localizacion">
+            <input type="text" class="form-control" id="localizacion" name="localizacion" maxlength="255" required="required">
             <label for="cantidad">Cantidad:</label>
-            <input type="text" class="form-control" id="cantidad" name="cantidad">
+            <input type="text" class="form-control" id="cantidad" name="cantidad" required="required">
             <label for="libro_id">Titulo Libro:</label>
                 <select class="form-control" id="libro_id" name="libro_id">
                     @foreach ($libro as $libro)
