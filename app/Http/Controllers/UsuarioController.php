@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Usuario;
-
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -14,7 +14,7 @@ class UsuarioController extends Controller
     {
         return view('Usuario.index',[
             'usuario'=>Usuario::all()
-            
+  
         ]);
     }
 
@@ -23,7 +23,9 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view('Usuario.create');
+        return view('Usuario.create', [
+            'errors' => session('errors')
+        ]);
     }
 
     /**
@@ -31,6 +33,17 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|max:50|',
+            'telefono' => 'required|max:15',
+            'direccion' => 'required|max:20|'
+          ]);
+      
+          if ($validator->fails()) {
+              return redirect('Usuario/create')
+                          ->withErrors($validator)
+                          ->withInput();
+          }
         $usuario = new Usuario ();
         $usuario->nombre =$request->get('nombre');
         $usuario->telefono =$request->get('telefono');

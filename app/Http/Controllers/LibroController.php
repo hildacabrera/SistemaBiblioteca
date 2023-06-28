@@ -6,6 +6,7 @@ use App\Models\Libro;
 use App\Models\Autor;
 use App\Models\Editorial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class LibroController extends Controller
 {
@@ -14,10 +15,6 @@ class LibroController extends Controller
      */
     public function index()
     {
-       /* return view('Libro.index',[
-            'libro'=>Libro::all()
-   
-        ]);*/
         return view('Libro.index',[
             'libro'=>Libro::select('libro.*','autor.nombre as nombre_autor','editorial.nombre as nombre_editorial')
             ->join('autor','libro.autor_id', '=','autor.id')
@@ -34,7 +31,9 @@ class LibroController extends Controller
      */
     public function create()
     {
-        return view('Libro.create',['autor'=>Autor::all()],['editorial'=>Editorial::all()]);
+        return view('Libro.create',['autor'=>Autor::all()],['editorial'=>Editorial::all(),[
+            'errors' => session('errors')]]);
+        
     }
 
     /**
@@ -42,6 +41,20 @@ class LibroController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'titulo' => 'required|max:50|',
+            'isbn'=> 'required|max:20|', 
+            'paginas'=> 'required|max:4|', 
+            'localizacion'=> 'required|max:50|'   
+            
+          ]);
+      
+          if ($validator->fails()) {
+              return redirect('Libro/create')
+                          ->withErrors($validator)
+                          ->withInput();
+           }
         {
             $libro = new Libro ();
             $libro->titulo =$request->get('titulo');
@@ -103,24 +116,24 @@ class LibroController extends Controller
         $libro->delete();
            return redirect('/Libro');*/
 
-        $borrarLibro = $this->buscarLibroEditorial($id);
+        $borrarLibro = $this->buscarLibroEjemplar($id);
         if($borrarLibro == "Y"){
             $libro = Libro::find($id);
             $libro->delete();
-            return redirect('/Editorial');
+            return redirect('/Ejemplar');
         }else{
             $libro = Libro::find($id);
             $nombreLibro = $libro->titulo;
    
             return redirect()->action([self::class, 'index'],
-            ['error' => 'No puede eliminar el libro "'.$nombreLibro.'" porque esta asignado en varios editoriales.']);
+            ['error' => 'No puede eliminar el libro "'.$nombreLibro.'" porque esta asignado en varios ejemplares.']);
         }
     }
-    public function buscarLibroEditorial(string $libro_id)
+    public function buscarLibroEjemplar(string $libro_id)
     {
         $borrarLibro = "N";
         $libro = Libro::select('*')
-        ->join('editorial','libro.editorial_id', '=','editorial.id')
+        ->join('ejemplar','libro.id', '=','ejemplar.libro_id')
         ->where('libro.id', '=', $libro_id)
         ->get();
    

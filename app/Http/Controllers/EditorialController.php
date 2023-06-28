@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Editorial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class EditorialController extends Controller
 {
@@ -13,9 +14,10 @@ class EditorialController extends Controller
     public function index()
     {
         return view('Editorial.index',[
-            'editorial'=>Editorial::all()
-            
+            'editorial'=>Editorial::all(),
+            'error' => session('error')
         ]);
+       
     }
 
     /**
@@ -23,7 +25,9 @@ class EditorialController extends Controller
      */
     public function create()
     {
-        return view('Editorial.create');
+        return view('Editorial.create', [
+            'errors' => session('errors')
+        ]);
     }
 
     /**
@@ -31,6 +35,15 @@ class EditorialController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|max:50|',
+          ]);
+      
+          if ($validator->fails()) {
+              return redirect('Editorial/create')
+                          ->withErrors($validator)
+                          ->withInput();
+          }
         $editorial = new Editorial ();
         $editorial->nombre =$request->get('nombre');
                 $editorial->save();

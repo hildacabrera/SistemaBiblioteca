@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ejemplar;
 use App\Models\Libro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class EjemplarController extends Controller
 {
@@ -27,7 +28,8 @@ class EjemplarController extends Controller
      */
     public function create()
     {
-        return view('Ejemplar.create',['libro'=>Libro::all()]);
+        return view('Ejemplar.create',['libro'=>Libro::all(),[
+            'errors' => session('errors')]]);
     }
 
     /**
@@ -35,6 +37,16 @@ class EjemplarController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'localizacion'=> 'required|max:50|',
+            'cantidad'=> 'required|max:5|'
+          ]);
+      
+          if ($validator->fails()) {
+              return redirect('Ejemplar/create')
+                          ->withErrors($validator)
+                          ->withInput();
+           }
         {
             $ejemplar = new Ejemplar ();
             $ejemplar->localizacion =$request->get('localizacion');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Autor;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AutorController extends Controller
 {
@@ -13,7 +14,8 @@ class AutorController extends Controller
     public function index()
     {
         return view('Autor.index',[
-            'autor'=>Autor::all()
+            'autor'=>Autor::all(),
+            'error' => session('error')
             
         ]);
     }
@@ -23,7 +25,9 @@ class AutorController extends Controller
      */
     public function create()
     {
-        return view('Autor.create');
+        return view('Autor.create', [
+            'errors' => session('errors')
+        ]);
     }
 
     /**
@@ -31,6 +35,16 @@ class AutorController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'nombre' => 'required|max:50|',
+          ]);
+      
+          if ($validator->fails()) {
+              return redirect('Autor/create')
+                          ->withErrors($validator)
+                          ->withInput();
+          }
+
         $autor = new Autor ();
         $autor->nombre =$request->get('nombre');
                 $autor->save();
